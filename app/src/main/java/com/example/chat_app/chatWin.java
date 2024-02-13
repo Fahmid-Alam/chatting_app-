@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -62,6 +63,8 @@ public class chatWin extends AppCompatActivity {
         reciverName = getIntent().getStringExtra("nameeee");
         reciverimg = getIntent().getStringExtra("reciverImg");
         reciverUid = getIntent().getStringExtra("uid");
+        Log.d("Fahmid", "onCreate: "+reciverName);
+        Log.d("Fahmid1", "onCreate: "+reciverUid);
 
         firebaseAuth=FirebaseAuth.getInstance();
         database=FirebaseDatabase.getInstance();
@@ -87,10 +90,11 @@ public class chatWin extends AppCompatActivity {
         reciverRoom=reciverRoom+SenderUID;
 
 
+        Log.d("Fahmid2", "onCreate: "+senderRoom);
 
 
 
-        DatabaseReference chatrefernce=database.getReference().child("chats").child(senderRoom).child("messages");
+        DatabaseReference chatrefernce=database.getReference().child("chats").child("senderRoom").child("messages");
 
         chatrefernce.addValueEventListener(new ValueEventListener() {
             @Override
@@ -110,6 +114,7 @@ public class chatWin extends AppCompatActivity {
         });
 
 
+        Log.d("Fahmid3", "onCreate: "+messagesArrayList);
         DatabaseReference reference=database.getReference().child("user").child(firebaseAuth.getUid());
 
         reference.addValueEventListener(new ValueEventListener() {
